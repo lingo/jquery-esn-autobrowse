@@ -156,9 +156,6 @@ jQuery.fn.autobrowse = function (options)
 						stopping = true;
                     }
                     loading = false;
-					if (!stopping) {
-						scrollCallback();
-					}
                 };
 
                 if (options.postData)
