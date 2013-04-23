@@ -122,11 +122,15 @@ jQuery.fn.autobrowse = function (options)
                 var ajaxCallback = function (response) {
                     if (options.itemsReturned(response) > 0)
                     {
-                        // Create the markup and append it to the container
-                        try { var markup = options.template(response); }
-                        catch (e) { console.error(e) } // ignore for now
-                        var newElements = jQuery(markup);
-                        newElements.appendTo(obj);
+                        if (typeof(options.load) === 'function') {
+                            newElements = options.load.call(obj, response);
+                        } else {
+                            // Create the markup and append it to the container
+                            try { var markup = options.template(response); }
+                            catch (e) { console.error(e) } // ignore for now
+                            var newElements = jQuery(markup);
+                            newElements.appendTo(obj);
+                        }
 
                         // Call user onComplete callback
                         options.complete.call(obj, response, newElements);
