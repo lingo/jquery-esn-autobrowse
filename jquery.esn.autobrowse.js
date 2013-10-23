@@ -71,6 +71,11 @@ jQuery.fn.autobrowse = function (options)
         jQuery.jStorage.flush();
         return this;
     }
+    if (typeof options == "string" && options == "stop")
+    {
+        jQuery(window).unbind("scroll");
+        return this;
+    }
 
     options = jQuery.extend(defaults, options);
 
